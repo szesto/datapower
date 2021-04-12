@@ -1,0 +1,6 @@
+apiVersion: datapower.ibm.com/v1beta3
+kind: DataPowerService
+metadata:
+  name: datapower-service-1
+spec:
+  replicas: 100

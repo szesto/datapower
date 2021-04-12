@@ -1,0 +1,1 @@
+s/timezone .*/timezone pacific/g

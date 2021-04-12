@@ -1,0 +1,30 @@
+apiVersion: datapower.ibm.com/v1beta3
+kind: DataPowerService
+metadata:
+  name: datapower-service-1
+spec:
+  replicas: 3
+
+  resources:
+    requests:
+      cpu: 4
+      memory: 4Gi
+    limits:
+      memory: 8Gi
+
+  domains:
+  - name: "default"
+    dpApp:
+      config:
+      - "auto-startup-cfg"
+      - "auto-user-cfg"
+      - "default-cfg"
+      local:
+      - "default-local-tgz"
+
+  - name: "test"
+    dpApp:
+      config:
+        "test-cfg"
+      local:
+      - "test-local-tgz"

@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: datapower-prod-1
+
+bases:
+- ../../base
+
+patchesStrategicMerge:
+- replica-count.yaml
+- resource-limits.yaml
+
