@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: datapower-build-task
+  annotations:
+    tekton.dev/tags: datapower-build
+    tekton.dev/displayName: "datapower build task"
+spec:
+  description: "datapower build task"
+  params:
+  - name: gitrepo
+    type: string
+    default: https://github.com/szesto/datapower
+  workspaces:
+    - name: basedir
+      description: datapower git clone directory
+  steps:
+    - name: git-clone
+      image: quay.io/ibmgaragecloud/alpine-git
+      script: |
+        /bin/sh
+        git clone $(params.gitrepo) $(workspaces.basedir.path)
+    - name: build-datapower-config
+      image: docker.io/library/centos
+      script: |
+        /bin/sh
+        cd $(workspaces.basedir.path)/gitrepo
+        scripts/build-production-config.sh $(workspaces.basedir.path)/build/datapower
